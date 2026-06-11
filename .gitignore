@@ -16,3 +16,4 @@ fixtures/consumer-v3/src/lib/
 fixtures/consumer-v3/src/components/
 fixtures/consumer-v3/package-lock.json
 *.tsbuildinfo
+.playwright-mcp/

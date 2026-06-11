@@ -4,11 +4,54 @@
   "homepage": "https://lantern-registry.vercel.app",
   "items": [
     {
+      "name": "theme-lantern",
+      "type": "registry:theme",
+      "title": "Lantern Theme",
+      "description": "Дизайн-токены Lantern: CSS-переменные для shadcn-слотов (light). cssVars генерируются scripts/sync-tokens.mjs.",
+      "cssVars": {
+        "light": {
+          "background": "0 0% 100%",
+          "foreground": "0 0% 3.9%",
+          "card": "0 0% 100%",
+          "card-foreground": "0 0% 3.9%",
+          "popover": "0 0% 100%",
+          "popover-foreground": "0 0% 3.9%",
+          "primary": "258.8 63.3% 59.4%",
+          "primary-foreground": "0 0% 98%",
+          "secondary": "0 0% 96.1%",
+          "secondary-foreground": "0 0% 9%",
+          "muted": "0 0% 96.1%",
+          "muted-foreground": "0 0% 45.1%",
+          "accent": "267.7 95.1% 92%",
+          "accent-foreground": "259.8 76.6% 69.8%",
+          "destructive": "0 72.2% 50.6%",
+          "destructive-foreground": "0 0% 100%",
+          "border": "0 0% 89.8%",
+          "input": "0 0% 89.8%",
+          "ring": "0 0% 83.1%",
+          "tooltip": "0 0% 0%",
+          "tooltip-foreground": "0 0% 100%",
+          "sidebar": "0 0% 98%",
+          "sidebar-foreground": "0 0% 25.1%",
+          "sidebar-primary": "0 0% 9%",
+          "sidebar-primary-foreground": "0 0% 98%",
+          "sidebar-accent": "0 0% 96.1%",
+          "sidebar-accent-foreground": "0 0% 9%",
+          "sidebar-border": "0 0% 89.8%",
+          "sidebar-ring": "0 0% 83.1%",
+          "radius": "0.625rem"
+        }
+      }
+    },
+    {
       "name": "utils",
       "type": "registry:lib",
       "title": "Utils",
       "description": "Утилита cn() для объединения Tailwind-классов.",
-      "dependencies": ["clsx", "tailwind-merge"],
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
       "files": [
         {
           "path": "registry/default/lib/utils.ts",

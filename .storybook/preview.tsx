@@ -1,7 +1,8 @@
 import type { Preview } from "@storybook/react-vite";
-import { withThemeByClassName } from "@storybook/addon-themes";
 import "../src/index.css";
 
+// Тёмной темы у Lantern пока нет (решение 2026-06-11) — когда появится
+// дизайн, вернуть withThemeByClassName из @storybook/addon-themes.
 const preview: Preview = {
   parameters: {
     controls: {
@@ -18,16 +19,6 @@ const preview: Preview = {
       test: "todo",
     },
   },
-
-  decorators: [
-    withThemeByClassName({
-      themes: {
-        light: "",
-        dark: "dark",
-      },
-      defaultTheme: "light",
-    }),
-  ],
 };
 
 export default preview;

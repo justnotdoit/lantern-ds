@@ -13,6 +13,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "registry:build": "shadcn build",
+    "sync:tokens": "node scripts/sync-tokens.mjs",
     "check:ts51": "node scripts/check-ts51.mjs"
   },
   "dependencies": {

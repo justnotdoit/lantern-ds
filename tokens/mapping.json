@@ -1,0 +1,43 @@
+{
+  "$comment": "Таблица соответствий: CSS-переменная shadcn <- путь токена в tokens/lantern-tokens.json. Источник значений — режим из поля mode. Сверена с Alex 2026-06-11. Правки здесь + npm run sync:tokens.",
+  "mode": "semantic colors/Lantern",
+  "rawColors": "raw colors/Mode 1",
+  "radius": "0.625rem",
+  "light": {
+    "background": "general/background",
+    "foreground": "general/foreground",
+    "card": "card/card",
+    "card-foreground": "card/card foreground",
+    "popover": {
+      "token": "card/card",
+      "note": "Решение 2026-06-11: в коде shadcn --popover — фон выпадающих меню (белый). Чёрный Figma-токен popover/popover уехал в --tooltip."
+    },
+    "popover-foreground": { "token": "card/card foreground" },
+    "primary": "general/primary",
+    "primary-foreground": "general/primary foreground",
+    "secondary": "general/secondary",
+    "secondary-foreground": "general/secondary foreground",
+    "muted": "general/muted",
+    "muted-foreground": "general/muted foreground",
+    "accent": "general/accent",
+    "accent-foreground": "general/accent foreground",
+    "destructive": "general/destructive",
+    "destructive-foreground": "general/destructive foreground",
+    "border": "general/border",
+    "input": {
+      "token": "general/border",
+      "note": "Решение 2026-06-11: в коде shadcn --input — цвет рамки инпута, а не фон. Figma-токен general/input (белый фон поля) в CSS не нужен."
+    },
+    "ring": "focus/ring",
+    "tooltip": "popover/popover",
+    "tooltip-foreground": "popover/popover foreground",
+    "sidebar": "sidebar/sidebar",
+    "sidebar-foreground": "sidebar/sidebar foreground",
+    "sidebar-primary": "sidebar/sidebar primary",
+    "sidebar-primary-foreground": "sidebar/sidebar primary foreground",
+    "sidebar-accent": "sidebar/sidebar accent",
+    "sidebar-accent-foreground": "sidebar/sidebar accent foreground",
+    "sidebar-border": "sidebar/sidebar border",
+    "sidebar-ring": "sidebar/sidebar ring"
+  }
+}

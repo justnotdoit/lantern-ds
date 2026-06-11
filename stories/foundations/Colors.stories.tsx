@@ -12,6 +12,17 @@ const TOKEN_GROUPS: Record<string, string[]> = {
     "destructive",
     "destructive-foreground",
   ],
+  Tooltip: ["tooltip", "tooltip-foreground"],
+  Sidebar: [
+    "sidebar",
+    "sidebar-foreground",
+    "sidebar-primary",
+    "sidebar-primary-foreground",
+    "sidebar-accent",
+    "sidebar-accent-foreground",
+    "sidebar-border",
+    "sidebar-ring",
+  ],
 };
 
 function Swatch({ token }: { token: string }) {
