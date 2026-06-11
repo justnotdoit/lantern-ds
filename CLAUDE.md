@@ -13,6 +13,13 @@
 5. **Файлы в `registry/` самодостаточны**: зависят только от npm-пакетов, `@/lib/utils` и `registryDependencies`. Stories импортируют ИЗ `registry/`, никогда наоборот.
 6. tailwind-merge остаётся на **v2** (v3 — для Tailwind 4).
 
+## Перевод токенов Figma → Tailwind
+
+- Spacing и shadows совпадают со стандартной шкалой Tailwind — обычные `p-*`, `gap-*`, `shadow-*`.
+- **Радиусы: имена в Figma сдвинуты на шаг** относительно Tailwind: figma `rounded-xs`=2px=tw `rounded-sm`, figma `rounded-sm`=4px=tw `rounded`, figma `rounded-md`=6px=tw `rounded-md`, figma `rounded-lg`=8px=tw `rounded-lg`. Компонентный токен `radius`=10px → `--radius` (в shadcn-компонентах сейчас это не «стандартный» rounded-lg — сверяйся со значением в px из Figma).
+- Типографика: Inter; heading 1 → `text-5xl leading-none font-semibold tracking-[-1.5px]`, heading 2 → `text-3xl leading-none font-semibold tracking-[-1px]`, heading 3 → `text-2xl font-semibold tracking-[-1px]`, heading 4 → `text-xl leading-6 font-semibold`, параграфы large/regular/small/mini → `text-lg`/`text-base`/`text-sm`/`text-xs`.
+- Цвета — только семантические токены (`bg-primary`, `text-muted-foreground`, `bg-tooltip`...). Никогда не хардкодить hex из Figma: если в макете цвет, которого нет в маппинге, — спросить дизайнера, какой это токен.
+
 ## Структура
 
 - `registry/default/ui/<name>/<name>.tsx` — компоненты (forwardRef + CVA-варианты)
