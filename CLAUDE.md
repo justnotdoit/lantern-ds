@@ -13,6 +13,10 @@
 5. **Файлы в `registry/` самодостаточны**: зависят только от npm-пакетов, `@/lib/utils` и `registryDependencies`. Stories импортируют ИЗ `registry/`, никогда наоборот.
 6. tailwind-merge остаётся на **v2** (v3 — для Tailwind 4).
 
+## Язык
+
+Весь видимый разработчикам контент — **только на английском**: тексты в Storybook (stories, MDX, примеры), описания registry-items, README-инструкции для потребителей, демо-страница. Русский допустим во внутренних доках (CLAUDE.md, комментарии в скриптах, mapping.json).
+
 ## Перевод токенов Figma → Tailwind
 
 - Spacing и shadows совпадают со стандартной шкалой Tailwind — обычные `p-*`, `gap-*`, `shadow-*`.

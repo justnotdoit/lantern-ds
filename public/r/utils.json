@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "utils",
   "title": "Utils",
-  "description": "Утилита cn() для объединения Tailwind-классов.",
+  "description": "The cn() utility for merging Tailwind classes.",
   "dependencies": [
     "clsx",
     "tailwind-merge"

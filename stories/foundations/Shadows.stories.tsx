@@ -6,8 +6,8 @@ function ShadowScale() {
   return (
     <div className="flex flex-col gap-4 bg-background p-6 text-foreground">
       <p className="text-sm text-muted-foreground">
-        Тени Lantern совпадают со стандартной шкалой Tailwind — используйте
-        классы <code>shadow-*</code> как есть.
+        Lantern shadows match the standard Tailwind scale — use the
+        <code> shadow-*</code> classes as is.
       </p>
       <div className="grid grid-cols-3 gap-8 p-4">
         {SHADOWS.map((cls) => (

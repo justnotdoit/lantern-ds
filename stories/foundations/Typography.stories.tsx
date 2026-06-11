@@ -36,25 +36,25 @@ const SAMPLES: TypeSample[] = [
     figmaToken: "paragraph large — 18/27 Regular",
     tailwindClass: "text-lg",
     className: "text-lg",
-    sample: "Параграф large: почти каждый интерфейс начинается с текста.",
+    sample: "Large paragraph: almost every interface starts with text.",
   },
   {
     figmaToken: "paragraph regular — 16/24 Regular",
     tailwindClass: "text-base",
     className: "text-base",
-    sample: "Параграф regular: почти каждый интерфейс начинается с текста.",
+    sample: "Regular paragraph: almost every interface starts with text.",
   },
   {
     figmaToken: "paragraph small — 14/20 Regular",
     tailwindClass: "text-sm",
     className: "text-sm",
-    sample: "Параграф small: почти каждый интерфейс начинается с текста.",
+    sample: "Small paragraph: almost every interface starts with text.",
   },
   {
     figmaToken: "paragraph mini — 12/16 Regular",
     tailwindClass: "text-xs",
     className: "text-xs",
-    sample: "Параграф mini: почти каждый интерфейс начинается с текста.",
+    sample: "Mini paragraph: almost every interface starts with text.",
   },
   {
     figmaToken: "monospaced — 16/24 Regular",
@@ -68,8 +68,8 @@ function TypeScale() {
   return (
     <div className="flex flex-col gap-8 bg-background p-6 text-foreground">
       <p className="text-sm text-muted-foreground">
-        Шрифт: <strong className="text-foreground">Inter</strong> (font-sans).
-        Колонка справа — класс Tailwind, которым этот стиль набирается в коде.
+        Typeface: <strong className="text-foreground">Inter</strong> (font-sans).
+        The right column is the Tailwind class used to set this style in code.
       </p>
       {SAMPLES.map((item) => (
         <div key={item.figmaToken} className="flex flex-col gap-1">

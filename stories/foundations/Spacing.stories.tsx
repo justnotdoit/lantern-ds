@@ -18,9 +18,9 @@ function SpacingScale() {
   return (
     <div className="flex flex-col gap-3 bg-background p-6 text-foreground">
       <p className="text-sm text-muted-foreground">
-        Шкала отступов Lantern совпадает со стандартной шкалой Tailwind
-        (шаг = 4px). В Figma именованные токены (3xs…5xl) — алиасы этих же значений:
-        используйте обычные классы <code>p-*</code>, <code>gap-*</code>, <code>m-*</code>.
+        The Lantern spacing scale matches the standard Tailwind scale
+        (4px step). Named Figma tokens (3xs…5xl) are aliases of the same values:
+        use the regular <code>p-*</code>, <code>gap-*</code>, <code>m-*</code> classes.
       </p>
       {STEPS.map((s) => (
         <div key={s.name} className="flex items-center gap-3 text-xs">

@@ -5,7 +5,7 @@ const RADII: { figmaToken: string; tailwindClass: string; px: string }[] = [
   { figmaToken: "rounded-sm (radius-4)", tailwindClass: "rounded", px: "4px" },
   { figmaToken: "rounded-md (radius-6)", tailwindClass: "rounded-md", px: "6px" },
   { figmaToken: "rounded-lg (radius-8)", tailwindClass: "rounded-lg", px: "8px" },
-  { figmaToken: "radius (radius-10) — токен компонентов", tailwindClass: "rounded-[var(--radius)]", px: "10px" },
+  { figmaToken: "radius (radius-10) — component token", tailwindClass: "rounded-[var(--radius)]", px: "10px" },
   { figmaToken: "rounded-xl (radius-12)", tailwindClass: "rounded-xl", px: "12px" },
   { figmaToken: "rounded-2xl (radius-16)", tailwindClass: "rounded-2xl", px: "16px" },
   { figmaToken: "rounded-3xl (radius-24)", tailwindClass: "rounded-3xl", px: "24px" },
@@ -16,10 +16,10 @@ function RadiiScale() {
   return (
     <div className="flex flex-col gap-4 bg-background p-6 text-foreground">
       <p className="text-sm text-muted-foreground">
-        Внимание: имена в Figma сдвинуты на шаг относительно Tailwind
+        Note: Figma token names are shifted one step relative to Tailwind
         (figma <code>rounded-sm</code> = 4px = tailwind <code>rounded</code>).
-        Компонентный радиус Lantern: <code>--radius: 10px</code> —
-        в shadcn-компонентах это <code>rounded-lg</code> (= var(--radius)).
+        Lantern component radius: <code>--radius: 10px</code> —
+        in shadcn components that is <code>rounded-lg</code> (= var(--radius)).
       </p>
       <div className="grid grid-cols-3 gap-4">
         {RADII.map((r) => (
