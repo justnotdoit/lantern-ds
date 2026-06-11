@@ -3,6 +3,10 @@
   "mode": "semantic colors/Lantern",
   "rawColors": "raw colors/Mode 1",
   "radius": "0.625rem",
+  "rawColorDiffIgnore": {
+    "$comment": "Расхождения с палитрой Tailwind, признанные опечатками в Figma (решение Alex 2026-06-11) — используем стандартное значение Tailwind.",
+    "ignore": ["red/100"]
+  },
   "light": {
     "background": "general/background",
     "foreground": "general/foreground",

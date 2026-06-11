@@ -1,5 +1,6 @@
 import tailwindcssAnimate from "tailwindcss-animate";
 import defaultTheme from "tailwindcss/defaultTheme";
+import customScales from "./tokens/custom-scales.js";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -16,6 +17,7 @@ export default {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
       colors: {
+        ...customScales,
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
