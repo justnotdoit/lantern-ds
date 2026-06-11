@@ -58,6 +58,132 @@
           "type": "registry:lib"
         }
       ]
+    },
+    {
+      "name": "icons",
+      "type": "registry:ui",
+      "title": "Icons",
+      "description": "The Lantern icon set: product icons exported from Figma plus the curated Lucide subset re-exported from lucide-react.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/default/icons/index.ts",
+          "type": "registry:ui",
+          "target": "components/icons/index.ts"
+        },
+        {
+          "path": "registry/default/icons/types.ts",
+          "type": "registry:ui",
+          "target": "components/icons/types.ts"
+        },
+        {
+          "path": "registry/default/icons/lucide.ts",
+          "type": "registry:ui",
+          "target": "components/icons/lucide.ts"
+        },
+        {
+          "path": "registry/default/icons/custom/accounts.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/accounts.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/ad-library.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/ad-library.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/agents.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/agents.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/apps.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/apps.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/assets.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/assets.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/calculator.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/calculator.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/contacts.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/contacts.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/data.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/data.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/history.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/history.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/house.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/house.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/ideas.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/ideas.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/linkedin.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/linkedin.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/new-agent.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/new-agent.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/overview.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/overview.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/pinned-tabs.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/pinned-tabs.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/sequencing.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/sequencing.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/skills-library.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/skills-library.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/views.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/views.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/visualize.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/visualize.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/workflow.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/workflow.tsx"
+        }
+      ]
     }
   ]
 }
