@@ -1,0 +1,32 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Lantern/Welcome" />
+
+# Lantern Design System
+
+Дизайн-система Lantern: готовые React-компоненты, совместимые со стеком продуктов
+(React 18.3, TypeScript 5.1, Tailwind CSS 3.4, shadcn/ui).
+
+## Как установить компонент
+
+Компоненты распространяются через shadcn registry — код копируется прямо в ваш проект:
+
+```bash
+npx shadcn@latest add @lantern/button
+```
+
+Один раз добавьте registry в `components.json` вашего проекта:
+
+```json
+{
+  "registries": {
+    "@lantern": "https://lantern-registry.vercel.app/r/{name}.json"
+  }
+}
+```
+
+## Разделы
+
+- **Foundations** — цвета, типографика, радиусы (дизайн-токены)
+- **Icons** — иконпак Lantern
+- **UI** — компоненты

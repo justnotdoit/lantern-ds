@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Typecheck + build (DS repo)
+        run: npm run build
+
+      - name: Registry source compiles under consumer TypeScript 5.1
+        run: npm run check:ts51
+
+      - name: Build registry JSON
+        run: npm run registry:build
+
+      - name: Build Storybook
+        run: npm run build-storybook
+
+  consumer-install:
+    name: Install into Tailwind v3 consumer fixture
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build registry JSON
+        run: npm run registry:build
+
+      - name: Serve registry locally
+        run: |
+          npx serve public -l 8080 &
+          npx wait-on http://localhost:8080/r/registry.json --timeout 30000
+
+      - name: Install fixture dependencies
+        working-directory: fixtures/consumer-v3
+        run: npm install
+
+      - name: Install Lantern items via shadcn CLI
+        working-directory: fixtures/consumer-v3
+        run: npx shadcn@latest add @lantern/utils --yes --overwrite
+
+      - name: Fixture typechecks (TS 5.1) and builds
+        working-directory: fixtures/consumer-v3
+        run: npm run build

@@ -1,0 +1,18 @@
+node_modules/
+dist/
+storybook-static/
+*.log
+.DS_Store
+*.local
+.env
+.env.*
+!.env.example
+.vercel/
+
+*storybook.log
+
+# Артефакты CI-проверки установки в фикстуру — не коммитить
+fixtures/consumer-v3/src/lib/
+fixtures/consumer-v3/src/components/
+fixtures/consumer-v3/package-lock.json
+*.tsbuildinfo
