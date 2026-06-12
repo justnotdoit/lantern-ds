@@ -1,4 +1,6 @@
+import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { cn } from "@/lib/utils";
 import {
   Sidebar,
   SidebarContent,
@@ -36,55 +38,61 @@ import {
   WandSparkles,
 } from "@/registry/default/icons";
 
+type IconComponent = React.ComponentType<{ size?: number | string; className?: string }>;
+
 const NAV_ITEMS = [
-  { label: "Agents", icon: AgentsIcon },
-  { label: "Ideas", icon: IdeasIcon },
-  { label: "Skills Library", icon: SkillsLibraryIcon },
-  { label: "Sequencing", icon: SequencingIcon },
-  { label: "Accounts", icon: AccountsIcon },
-  { label: "Contacts", icon: ContactsIcon },
-  { label: "Ad Library", icon: AdLibraryIcon },
+  { id: "nav-agents", label: "Agents", icon: AgentsIcon },
+  { id: "nav-ideas", label: "Ideas", icon: IdeasIcon },
+  { id: "nav-skills", label: "Skills Library", icon: SkillsLibraryIcon },
+  { id: "nav-sequencing", label: "Sequencing", icon: SequencingIcon },
+  { id: "nav-accounts", label: "Accounts", icon: AccountsIcon },
+  { id: "nav-contacts", label: "Contacts", icon: ContactsIcon },
+  { id: "nav-ad-library", label: "Ad Library", icon: AdLibraryIcon },
 ];
 
-function CategoryChip({
-  icon: Icon,
-  className,
-}: {
-  icon: React.ComponentType<{ size?: number | string; className?: string }>;
-  className: string;
-}) {
+function CategoryChip({ icon: Icon, className }: { icon: IconComponent; className: string }) {
   return (
-    <span className={`flex size-5 shrink-0 items-center justify-center rounded-xl ${className}`}>
+    <span
+      className={`flex size-5 shrink-0 items-center justify-center rounded-xl text-muted-foreground ${className}`}
+    >
       <Icon size={12} />
     </span>
   );
 }
 
-function AgentRow({
-  label,
-  chip,
-  chipClassName,
-  status,
-  isActive,
-}: {
+interface AgentRowProps {
   label: string;
-  chip: React.ComponentType<{ size?: number | string; className?: string }>;
+  chip: IconComponent;
   chipClassName: string;
   status?: React.ReactNode;
-  isActive?: boolean;
-}) {
+  isActive: boolean;
+  onSelect: () => void;
+}
+
+function AgentRow({ label, chip, chipClassName, status, isActive, onSelect }: AgentRowProps) {
   return (
     <SidebarMenuItem>
-      <SidebarMenuButton variant="pill" isActive={isActive} tooltip={label} className="text-foreground">
+      <SidebarMenuButton
+        variant="pill"
+        isActive={isActive}
+        tooltip={label}
+        className="text-foreground"
+        onClick={onSelect}
+      >
         <CategoryChip icon={chip} className={chipClassName} />
         <span className="min-w-0 flex-1 truncate">{label}</span>
       </SidebarMenuButton>
       {status && (
-        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 group-hover/menu-item:invisible">
+        <span
+          className={cn(
+            "pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 group-hover/menu-item:invisible",
+            isActive && "invisible",
+          )}
+        >
           {status}
         </span>
       )}
-      <SidebarMenuAction showOnHover className="right-3 w-4 rounded-full">
+      <SidebarMenuAction showOnHover={!isActive} className="right-3 w-4 rounded-full">
         <Ellipsis />
         <span className="sr-only">More</span>
       </SidebarMenuAction>
@@ -92,7 +100,62 @@ function AgentRow({
   );
 }
 
+interface AgentConfig {
+  id: string;
+  label: string;
+  chip: IconComponent;
+  chipClassName: string;
+  status?: React.ReactNode;
+}
+
+const BUILDING_AGENTS: AgentConfig[] = [
+  {
+    id: "agent-retail",
+    label: "Retail champions",
+    chip: Leaf,
+    chipClassName: "bg-lime-100",
+    status: <LoaderCircle className="animate-spin text-muted-foreground" />,
+  },
+  {
+    id: "agent-hggt-1",
+    label: "High Growth Global 2000",
+    chip: Settings2,
+    chipClassName: "bg-cyan-100",
+    status: <TriangleAlert className="text-destructive" />,
+  },
+  {
+    id: "agent-hggt-2",
+    label: "High Growth Global 2000",
+    chip: Goal,
+    chipClassName: "bg-orange-100",
+    status: <CircleQuestionMark className="text-amber-500" />,
+  },
+];
+
+const RECENT_AGENTS: AgentConfig[] = [
+  {
+    id: "agent-pipeline",
+    label: "Pipeline Enrichment with a very long name",
+    chip: WandSparkles,
+    chipClassName: "bg-blue-100",
+  },
+  {
+    id: "agent-weekly",
+    label: "Weekly Agentic AI",
+    chip: Send,
+    chipClassName: "bg-yellow-100",
+  },
+  {
+    id: "agent-inbound",
+    label: "Real-Time Inbound",
+    chip: UserRoundSearch,
+    chipClassName: "bg-gray-100",
+  },
+];
+
 function DemoSidebar({ defaultOpen }: { defaultOpen: boolean }) {
+  const [activeId, setActiveId] = useState("agent-pipeline");
+
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       <Sidebar collapsible="icon">
@@ -110,9 +173,13 @@ function DemoSidebar({ defaultOpen }: { defaultOpen: boolean }) {
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarSeparator />
-              {NAV_ITEMS.map(({ label, icon: Icon }) => (
-                <SidebarMenuItem key={label}>
-                  <SidebarMenuButton tooltip={label}>
+              {NAV_ITEMS.map(({ id, label, icon: Icon }) => (
+                <SidebarMenuItem key={id}>
+                  <SidebarMenuButton
+                    tooltip={label}
+                    isActive={activeId === id}
+                    onClick={() => setActiveId(id)}
+                  >
                     <Icon />
                     <span>{label}</span>
                   </SidebarMenuButton>
@@ -124,53 +191,42 @@ function DemoSidebar({ defaultOpen }: { defaultOpen: boolean }) {
           <SidebarGroup className="group-data-[collapsible=icon]:hidden">
             <SidebarGroupLabel>Building</SidebarGroupLabel>
             <SidebarMenu>
-              <AgentRow
-                label="Retail champions"
-                chip={Leaf}
-                chipClassName="bg-lime-100 text-foreground"
-                status={<LoaderCircle className="animate-spin text-muted-foreground" />}
-              />
-              <AgentRow
-                label="High Growth Global 2000"
-                chip={Settings2}
-                chipClassName="bg-cyan-100 text-foreground"
-                status={<TriangleAlert className="text-destructive" />}
-              />
-              <AgentRow
-                label="High Growth Global 2000"
-                chip={Goal}
-                chipClassName="bg-orange-100 text-foreground"
-                status={<CircleQuestionMark className="text-amber-500" />}
-              />
+              {BUILDING_AGENTS.map((agent) => (
+                <AgentRow
+                  key={agent.id}
+                  label={agent.label}
+                  chip={agent.chip}
+                  chipClassName={agent.chipClassName}
+                  status={agent.status}
+                  isActive={activeId === agent.id}
+                  onSelect={() => setActiveId(agent.id)}
+                />
+              ))}
             </SidebarMenu>
           </SidebarGroup>
 
           <SidebarGroup className="group-data-[collapsible=icon]:hidden">
             <SidebarGroupLabel>Recent</SidebarGroupLabel>
             <SidebarMenu>
-              <AgentRow
-                label="Pipeline Enrichment with a very long name"
-                chip={WandSparkles}
-                chipClassName="bg-blue-100 text-foreground"
-                isActive
-              />
-              <AgentRow
-                label="Weekly Agentic AI"
-                chip={Send}
-                chipClassName="bg-yellow-100 text-foreground"
-              />
-              <AgentRow
-                label="Real-Time Inbound"
-                chip={UserRoundSearch}
-                chipClassName="bg-gray-100 text-foreground"
-              />
+              {RECENT_AGENTS.map((agent) => (
+                <AgentRow
+                  key={agent.id}
+                  label={agent.label}
+                  chip={agent.chip}
+                  chipClassName={agent.chipClassName}
+                  status={agent.status}
+                  isActive={activeId === agent.id}
+                  onSelect={() => setActiveId(agent.id)}
+                />
+              ))}
             </SidebarMenu>
           </SidebarGroup>
         </SidebarContent>
       </Sidebar>
       <SidebarInset>
         <div className="flex h-full items-center justify-center p-8 text-sm text-muted-foreground">
-          Application content. Toggle the sidebar with the header button or ⌘B.
+          Application content. Toggle the sidebar with the header button or ⌘B. Click items to move
+          the active state.
         </div>
       </SidebarInset>
     </SidebarProvider>
