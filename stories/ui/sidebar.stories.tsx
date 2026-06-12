@@ -78,9 +78,13 @@ function AgentRow({
       <SidebarMenuButton variant="pill" isActive={isActive} tooltip={label} className="text-foreground">
         <CategoryChip icon={chip} className={chipClassName} />
         <span className="min-w-0 flex-1 truncate">{label}</span>
-        {status}
       </SidebarMenuButton>
-      <SidebarMenuAction showOnHover className="rounded-full">
+      {status && (
+        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 group-hover/menu-item:invisible">
+          {status}
+        </span>
+      )}
+      <SidebarMenuAction showOnHover className="right-3 w-4 rounded-full">
         <Ellipsis />
         <span className="sr-only">More</span>
       </SidebarMenuAction>
@@ -124,19 +128,19 @@ function DemoSidebar({ defaultOpen }: { defaultOpen: boolean }) {
                 label="Retail champions"
                 chip={Leaf}
                 chipClassName="bg-lime-100 text-foreground"
-                status={<LoaderCircle className="ml-auto shrink-0 animate-spin text-muted-foreground" />}
+                status={<LoaderCircle className="animate-spin text-muted-foreground" />}
               />
               <AgentRow
                 label="High Growth Global 2000"
                 chip={Settings2}
                 chipClassName="bg-cyan-100 text-foreground"
-                status={<TriangleAlert className="ml-auto shrink-0 text-destructive" />}
+                status={<TriangleAlert className="text-destructive" />}
               />
               <AgentRow
                 label="High Growth Global 2000"
                 chip={Goal}
                 chipClassName="bg-orange-100 text-foreground"
-                status={<CircleQuestionMark className="ml-auto shrink-0 text-amber-500" />}
+                status={<CircleQuestionMark className="text-amber-500" />}
               />
             </SidebarMenu>
           </SidebarGroup>
