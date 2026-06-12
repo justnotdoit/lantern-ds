@@ -153,8 +153,11 @@ function DemoSidebar({ defaultOpen }: { defaultOpen: boolean }) {
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       <Sidebar collapsible="icon">
-        <SidebarHeader className="group-data-[collapsible=icon]:justify-center">
-          <LanternLogoIcon size={20} className="text-primary group-data-[collapsible=icon]:hidden" />
+        <SidebarHeader>
+          <LanternLogoIcon
+            size={20}
+            className="text-primary transition-opacity duration-200 group-data-[collapsible=icon]:opacity-0"
+          />
           <SidebarTrigger />
         </SidebarHeader>
         <SidebarContent>
@@ -182,7 +185,7 @@ function DemoSidebar({ defaultOpen }: { defaultOpen: boolean }) {
             </SidebarMenu>
           </SidebarGroup>
 
-          <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+          <SidebarGroup className="transition-opacity duration-200 group-data-[collapsible=icon]:pointer-events-none group-data-[collapsible=icon]:opacity-0">
             <SidebarGroupLabel>Building</SidebarGroupLabel>
             <SidebarMenu>
               {BUILDING_AGENTS.map((agent) => (
@@ -199,7 +202,7 @@ function DemoSidebar({ defaultOpen }: { defaultOpen: boolean }) {
             </SidebarMenu>
           </SidebarGroup>
 
-          <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+          <SidebarGroup className="transition-opacity duration-200 group-data-[collapsible=icon]:pointer-events-none group-data-[collapsible=icon]:opacity-0">
             <SidebarGroupLabel>Recent</SidebarGroupLabel>
             <SidebarMenu>
               {RECENT_AGENTS.map((agent) => (
