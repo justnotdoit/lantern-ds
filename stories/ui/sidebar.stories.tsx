@@ -153,10 +153,12 @@ function DemoSidebar({ defaultOpen }: { defaultOpen: boolean }) {
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       <Sidebar collapsible="icon">
-        <SidebarHeader>
+        <SidebarHeader className="relative justify-end">
+          {/* absolute: невидимый логотип не должен занимать место и толкать
+              триггер; left-5 центрирует 20px-глиф по колонке иконок (x=30) */}
           <LanternLogoIcon
             size={20}
-            className="text-primary transition-opacity duration-200 group-data-[collapsible=icon]:opacity-0"
+            className="absolute left-5 top-1/2 -translate-y-1/2 text-primary transition-opacity duration-200 group-data-[collapsible=icon]:opacity-0"
           />
           <SidebarTrigger />
         </SidebarHeader>
