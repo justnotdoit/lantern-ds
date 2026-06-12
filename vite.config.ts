@@ -16,6 +16,15 @@ export default defineConfig({
       find: "@/lib/utils",
       replacement: path.resolve(rootDir, "registry/default/lib/utils.ts")
     }, {
+      find: /^@\/components\/ui\/(.*)/,
+      replacement: path.resolve(rootDir, "registry/default/ui") + "/$1"
+    }, {
+      find: "@/components/icons",
+      replacement: path.resolve(rootDir, "registry/default/icons/index.ts")
+    }, {
+      find: /^@\/hooks\/(.*)/,
+      replacement: path.resolve(rootDir, "registry/default/hooks") + "/$1"
+    }, {
       find: "@",
       replacement: rootDir
     }]

@@ -37,6 +37,9 @@ const program = ts.createProgram(files, {
   baseUrl: rootDir,
   paths: {
     "@/lib/utils": ["./registry/default/lib/utils.ts"],
+    "@/components/ui/*": ["./registry/default/ui/*"],
+    "@/components/icons": ["./registry/default/icons/index.ts"],
+    "@/hooks/*": ["./registry/default/hooks/*"],
     "@/*": ["./*"],
   },
 });

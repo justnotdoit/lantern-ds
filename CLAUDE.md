@@ -26,7 +26,8 @@
 
 ## Структура
 
-- `registry/default/ui/<name>/<name>.tsx` — компоненты (forwardRef + CVA-варианты)
+- `registry/default/ui/<name>.tsx` — компоненты, плоские файлы (forwardRef + CVA-варианты). Импорты между компонентами — консьюмерские пути (`@/components/ui/<name>`, `@/hooks/<name>`, `@/lib/utils`), алиасы настроены в tsconfig/vite/check-ts51
+- `registry/default/hooks/<name>.ts` — хуки (registry:hook)
 - `registry/default/lib/utils.ts` — `cn()`
 - `registry/default/theme/` — токены (Фаза 2)
 - `registry.json` — манифест registry; каждый новый компонент добавляется сюда
