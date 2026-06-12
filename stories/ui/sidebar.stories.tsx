@@ -72,20 +72,14 @@ interface AgentRowProps {
 function AgentRow({ label, chip, chipClassName, status, isActive, onSelect }: AgentRowProps) {
   return (
     <SidebarMenuItem>
-      <SidebarMenuButton
-        variant="pill"
-        isActive={isActive}
-        tooltip={label}
-        className="text-foreground"
-        onClick={onSelect}
-      >
+      <SidebarMenuButton variant="pill" isActive={isActive} tooltip={label} onClick={onSelect}>
         <CategoryChip icon={chip} className={chipClassName} />
         <span className="min-w-0 flex-1 truncate">{label}</span>
       </SidebarMenuButton>
       {status && (
         <span
           className={cn(
-            "pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 group-hover/menu-item:invisible",
+            "pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 group-hover/menu-item:invisible [&>svg]:size-4",
             isActive && "invisible",
           )}
         >
@@ -167,7 +161,7 @@ function DemoSidebar({ defaultOpen }: { defaultOpen: boolean }) {
           <SidebarGroup>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton variant="pill" tooltip="New Agent" className="text-foreground">
+                <SidebarMenuButton variant="pill" tooltip="New Agent">
                   <NewAgentIcon />
                   <span>New Agent</span>
                 </SidebarMenuButton>

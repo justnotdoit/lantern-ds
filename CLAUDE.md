@@ -23,6 +23,7 @@
 - **Радиусы: имена в Figma сдвинуты на шаг** относительно Tailwind: figma `rounded-xs`=2px=tw `rounded-sm`, figma `rounded-sm`=4px=tw `rounded`, figma `rounded-md`=6px=tw `rounded-md`, figma `rounded-lg`=8px=tw `rounded-lg`. Компонентный токен `radius`=10px → `--radius` (в shadcn-компонентах сейчас это не «стандартный» rounded-lg — сверяйся со значением в px из Figma).
 - Типографика: Inter; heading 1 → `text-5xl leading-none font-semibold tracking-[-1.5px]`, heading 2 → `text-3xl leading-none font-semibold tracking-[-1px]`, heading 3 → `text-2xl font-semibold tracking-[-1px]`, heading 4 → `text-xl leading-6 font-semibold`, параграфы large/regular/small/mini → `text-lg`/`text-base`/`text-sm`/`text-xs`.
 - Цвета — только семантические токены (`bg-primary`, `text-muted-foreground`, `bg-tooltip`...). Никогда не хардкодить hex из Figma: если в макете цвет, которого нет в маппинге, — спросить дизайнера, какой это токен.
+- **ПРАВИЛО (от Alex, 2026-06-12): каждый видимый элемент обязан быть явно привязан к токену** — цвет, размер, типографика, скругление. Никогда не полагаться на случайные дефолты (например, дефолтный размер lucide-иконки 24px) или на наследование, которое может сломаться при перемещении элемента. После любого изменения вёрстки — проходить по всем затронутым элементам и сверять с токенами дизайна. Один и тот же тип элемента (пункт меню, имя агента) везде выглядит одинаково, без точечных переопределений в местах использования.
 
 ## Структура
 
