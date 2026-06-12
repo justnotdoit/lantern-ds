@@ -233,7 +233,7 @@ const SidebarTrigger = React.forwardRef<
       variant="ghost"
       size="icon"
       className={cn(
-        "h-7 w-7 text-muted-foreground hover:bg-sidebar-accent hover:text-muted-foreground",
+        "h-7 w-7 shrink-0 text-muted-foreground hover:bg-sidebar-accent hover:text-muted-foreground",
         className,
       )}
       onClick={(event) => {
@@ -300,7 +300,12 @@ const SidebarHeader = React.forwardRef<HTMLDivElement, React.ComponentProps<"div
       <div
         ref={ref}
         data-sidebar="header"
-        className={cn("flex h-[52px] shrink-0 items-center justify-between p-4", className)}
+        // pr-[15px] в icon-режиме: 15px + 1px рамки = 16px визуально, тогда
+        // иконка триггера встаёт ровно в колонку иконок меню (x=22)
+        className={cn(
+          "flex h-[52px] shrink-0 items-center justify-between p-4 group-data-[collapsible=icon]:pr-[15px]",
+          className,
+        )}
         {...props}
       />
     );
@@ -445,7 +450,7 @@ const SidebarMenuItem = React.forwardRef<HTMLLIElement, React.ComponentProps<"li
 SidebarMenuItem.displayName = "SidebarMenuItem";
 
 const sidebarMenuButtonVariants = cva(
-  "peer/menu-button flex w-full items-center gap-3 overflow-hidden rounded-md px-3 py-1 text-left text-sm font-normal leading-5 outline-none ring-sidebar-ring transition-[width,height,padding] hover:bg-sidebar-accent focus-visible:ring-2 active:bg-sidebar-accent disabled:pointer-events-none disabled:opacity-50 group-has-[[data-sidebar=menu-action]]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[state=open]:hover:bg-sidebar-accent group-data-[collapsible=icon]:!w-[calc(var(--sidebar-width-icon)-theme(spacing.5))] [&>span:last-child]:truncate [&>span:last-child]:transition-opacity [&>span:last-child]:duration-200 group-data-[collapsible=icon]:[&>span:last-child]:opacity-0 [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-muted-foreground",
+  "peer/menu-button flex w-full items-center gap-3 overflow-hidden rounded-md px-3 py-1 text-left text-sm font-normal leading-5 text-foreground outline-none ring-sidebar-ring transition-[width,height,padding] hover:bg-sidebar-accent focus-visible:ring-2 active:bg-sidebar-accent disabled:pointer-events-none disabled:opacity-50 group-has-[[data-sidebar=menu-action]]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[state=open]:hover:bg-sidebar-accent group-data-[collapsible=icon]:!w-[calc(var(--sidebar-width-icon)-theme(spacing.5))] [&>span:last-child]:truncate [&>span:last-child]:transition-opacity [&>span:last-child]:duration-200 group-data-[collapsible=icon]:[&>span:last-child]:opacity-0 [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-muted-foreground",
   {
     variants: {
       variant: {
