@@ -176,7 +176,7 @@ function DemoSidebar({ defaultOpen }: { defaultOpen: boolean }) {
               триггер; left-5 центрирует 20px-глиф по колонке иконок (x=30) */}
           <LanternLogoIcon
             size={20}
-            className="absolute left-5 top-1/2 -translate-y-1/2 text-primary transition-opacity duration-200 group-data-[collapsible=icon]:opacity-0"
+            className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-primary transition-opacity duration-200 group-data-[collapsible=icon]:opacity-0"
           />
           <SidebarTrigger />
         </SidebarHeader>
