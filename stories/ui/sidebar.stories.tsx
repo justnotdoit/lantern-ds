@@ -23,6 +23,7 @@ import {
   Ellipsis,
   Goal,
   IdeasIcon,
+  LanternLogoIcon,
   Leaf,
   LoaderCircle,
   NewAgentIcon,
@@ -59,11 +60,31 @@ function CategoryChip({
   );
 }
 
-function LanternLogo() {
+function AgentRow({
+  label,
+  chip,
+  chipClassName,
+  status,
+  isActive,
+}: {
+  label: string;
+  chip: React.ComponentType<{ size?: number | string; className?: string }>;
+  chipClassName: string;
+  status?: React.ReactNode;
+  isActive?: boolean;
+}) {
   return (
-    <span className="flex size-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
-      L
-    </span>
+    <SidebarMenuItem>
+      <SidebarMenuButton variant="pill" isActive={isActive} tooltip={label} className="text-foreground">
+        <CategoryChip icon={chip} className={chipClassName} />
+        <span className="min-w-0 flex-1 truncate">{label}</span>
+        {status}
+      </SidebarMenuButton>
+      <SidebarMenuAction showOnHover className="rounded-full">
+        <Ellipsis />
+        <span className="sr-only">More</span>
+      </SidebarMenuAction>
+    </SidebarMenuItem>
   );
 }
 
@@ -72,9 +93,7 @@ function DemoSidebar({ defaultOpen }: { defaultOpen: boolean }) {
     <SidebarProvider defaultOpen={defaultOpen}>
       <Sidebar collapsible="icon">
         <SidebarHeader className="group-data-[collapsible=icon]:justify-center">
-          <span className="group-data-[collapsible=icon]:hidden">
-            <LanternLogo />
-          </span>
+          <LanternLogoIcon size={20} className="text-primary group-data-[collapsible=icon]:hidden" />
           <SidebarTrigger />
         </SidebarHeader>
         <SidebarContent>
@@ -98,66 +117,49 @@ function DemoSidebar({ defaultOpen }: { defaultOpen: boolean }) {
             </SidebarMenu>
           </SidebarGroup>
 
-          <SidebarGroup>
+          <SidebarGroup className="group-data-[collapsible=icon]:hidden">
             <SidebarGroupLabel>Building</SidebarGroupLabel>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton variant="pill" tooltip="Retail champions" className="text-foreground">
-                  <CategoryChip icon={Leaf} className="bg-lime-100 text-foreground" />
-                  <span>Retail champions</span>
-                  <LoaderCircle className="ml-auto shrink-0 animate-spin text-muted-foreground" />
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton
-                  variant="pill"
-                  tooltip="High Growth Global 2000"
-                  className="text-foreground"
-                >
-                  <CategoryChip icon={Settings2} className="bg-cyan-100 text-foreground" />
-                  <span>High Growth Global 2000</span>
-                  <TriangleAlert className="ml-auto shrink-0 text-destructive" />
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton
-                  variant="pill"
-                  tooltip="High Growth Global 2000"
-                  className="text-foreground"
-                >
-                  <CategoryChip icon={Goal} className="bg-orange-100 text-foreground" />
-                  <span>High Growth Global 2000</span>
-                  <CircleQuestionMark className="ml-auto shrink-0 text-amber-500" />
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              <AgentRow
+                label="Retail champions"
+                chip={Leaf}
+                chipClassName="bg-lime-100 text-foreground"
+                status={<LoaderCircle className="ml-auto shrink-0 animate-spin text-muted-foreground" />}
+              />
+              <AgentRow
+                label="High Growth Global 2000"
+                chip={Settings2}
+                chipClassName="bg-cyan-100 text-foreground"
+                status={<TriangleAlert className="ml-auto shrink-0 text-destructive" />}
+              />
+              <AgentRow
+                label="High Growth Global 2000"
+                chip={Goal}
+                chipClassName="bg-orange-100 text-foreground"
+                status={<CircleQuestionMark className="ml-auto shrink-0 text-amber-500" />}
+              />
             </SidebarMenu>
           </SidebarGroup>
 
-          <SidebarGroup>
+          <SidebarGroup className="group-data-[collapsible=icon]:hidden">
             <SidebarGroupLabel>Recent</SidebarGroupLabel>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton variant="pill" isActive tooltip="Pipeline Enrichment" className="text-foreground">
-                  <CategoryChip icon={WandSparkles} className="bg-blue-100 text-foreground" />
-                  <span>Pipeline Enrichment with a very long name</span>
-                </SidebarMenuButton>
-                <SidebarMenuAction showOnHover className="rounded-full">
-                  <Ellipsis />
-                  <span className="sr-only">More</span>
-                </SidebarMenuAction>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton variant="pill" tooltip="Weekly Agentic AI" className="text-foreground">
-                  <CategoryChip icon={Send} className="bg-yellow-100 text-foreground" />
-                  <span>Weekly Agentic AI</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton variant="pill" tooltip="Real-Time Inbound" className="text-foreground">
-                  <CategoryChip icon={UserRoundSearch} className="bg-gray-100 text-foreground" />
-                  <span>Real-Time Inbound</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              <AgentRow
+                label="Pipeline Enrichment with a very long name"
+                chip={WandSparkles}
+                chipClassName="bg-blue-100 text-foreground"
+                isActive
+              />
+              <AgentRow
+                label="Weekly Agentic AI"
+                chip={Send}
+                chipClassName="bg-yellow-100 text-foreground"
+              />
+              <AgentRow
+                label="Real-Time Inbound"
+                chip={UserRoundSearch}
+                chipClassName="bg-gray-100 text-foreground"
+              />
             </SidebarMenu>
           </SidebarGroup>
         </SidebarContent>

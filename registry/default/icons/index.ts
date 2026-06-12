@@ -12,6 +12,7 @@ export { DataIcon } from "./custom/data";
 export { HistoryIcon } from "./custom/history";
 export { HouseIcon } from "./custom/house";
 export { IdeasIcon } from "./custom/ideas";
+export { LanternLogoIcon } from "./custom/lantern-logo";
 export { LinkedinIcon } from "./custom/linkedin";
 export { NewAgentIcon } from "./custom/new-agent";
 export { OverviewIcon } from "./custom/overview";

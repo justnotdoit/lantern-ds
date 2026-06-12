@@ -87,58 +87,114 @@
       "type": "registry:ui",
       "title": "Button",
       "description": "Button with variants (default, destructive, outline, secondary, ghost, link).",
-      "dependencies": ["@radix-ui/react-slot", "class-variance-authority"],
-      "registryDependencies": ["@lantern/utils"],
-      "files": [{ "path": "registry/default/ui/button.tsx", "type": "registry:ui" }]
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@lantern/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "separator",
       "type": "registry:ui",
       "title": "Separator",
       "description": "Visually or semantically separates content.",
-      "dependencies": ["@radix-ui/react-separator"],
-      "registryDependencies": ["@lantern/utils"],
-      "files": [{ "path": "registry/default/ui/separator.tsx", "type": "registry:ui" }]
+      "dependencies": [
+        "@radix-ui/react-separator"
+      ],
+      "registryDependencies": [
+        "@lantern/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/separator.tsx",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "tooltip",
       "type": "registry:ui",
       "title": "Tooltip",
       "description": "Tooltip styled with the Lantern tooltip tokens (dark background).",
-      "dependencies": ["@radix-ui/react-tooltip"],
-      "registryDependencies": ["@lantern/utils", "@lantern/theme-lantern"],
-      "files": [{ "path": "registry/default/ui/tooltip.tsx", "type": "registry:ui" }]
+      "dependencies": [
+        "@radix-ui/react-tooltip"
+      ],
+      "registryDependencies": [
+        "@lantern/utils",
+        "@lantern/theme-lantern"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "sheet",
       "type": "registry:ui",
       "title": "Sheet",
       "description": "Side panel built on Radix Dialog.",
-      "dependencies": ["@radix-ui/react-dialog", "class-variance-authority", "lucide-react"],
-      "registryDependencies": ["@lantern/utils"],
-      "files": [{ "path": "registry/default/ui/sheet.tsx", "type": "registry:ui" }]
+      "dependencies": [
+        "@radix-ui/react-dialog",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@lantern/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/sheet.tsx",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "skeleton",
       "type": "registry:ui",
       "title": "Skeleton",
       "description": "Loading placeholder.",
-      "registryDependencies": ["@lantern/utils"],
-      "files": [{ "path": "registry/default/ui/skeleton.tsx", "type": "registry:ui" }]
+      "registryDependencies": [
+        "@lantern/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/skeleton.tsx",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "use-mobile",
       "type": "registry:hook",
       "title": "useIsMobile",
       "description": "Hook that reports whether the viewport is below the mobile breakpoint.",
-      "files": [{ "path": "registry/default/hooks/use-mobile.ts", "type": "registry:hook" }]
+      "files": [
+        {
+          "path": "registry/default/hooks/use-mobile.ts",
+          "type": "registry:hook"
+        }
+      ]
     },
     {
       "name": "sidebar",
       "type": "registry:ui",
       "title": "Sidebar",
       "description": "Composable, collapsible Lantern sidebar (265px expanded, 60px icon rail). Based on the shadcn sidebar API: SidebarProvider, Sidebar, SidebarTrigger, SidebarHeader/Content/Footer, SidebarGroup, SidebarMenu and friends.",
-      "dependencies": ["@radix-ui/react-slot", "class-variance-authority", "lucide-react"],
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "@lantern/utils",
         "@lantern/theme-lantern",
@@ -149,7 +205,12 @@
         "@lantern/tooltip",
         "@lantern/use-mobile"
       ],
-      "files": [{ "path": "registry/default/ui/sidebar.tsx", "type": "registry:ui" }]
+      "files": [
+        {
+          "path": "registry/default/ui/sidebar.tsx",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "icons",
@@ -229,6 +290,11 @@
           "path": "registry/default/icons/custom/ideas.tsx",
           "type": "registry:ui",
           "target": "components/icons/custom/ideas.tsx"
+        },
+        {
+          "path": "registry/default/icons/custom/lantern-logo.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/custom/lantern-logo.tsx"
         },
         {
           "path": "registry/default/icons/custom/linkedin.tsx",
