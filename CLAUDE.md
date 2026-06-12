@@ -46,6 +46,7 @@
 5. Добавить item в `registry.json` (`registryDependencies: ["@lantern/utils", ...]`, npm-зависимости — например `@radix-ui/react-*` — в `dependencies`).
 6. `npm run registry:build && npm run check:ts51 && npm run build-storybook`.
 7. Сверить рендер в Storybook со скриншотом из Figma.
+7a. **Регрессия после правок**: у компонента в шапке story-файла ведётся список принятых на ревью решений — после любой правки пройтись по нему целиком и замерить геометрию (getBoundingClientRect через playwright) в обоих/всех состояниях. Не пушить, пока чек-лист не зелёный.
 8. E2e: поднять `npx serve public -l 8080`, в фикстуре `npx shadcn@latest add @lantern/<name> --yes --overwrite`, затем `npm run build` в фикстуре.
 9. Коммит (conventional commits: `feat: add button component`).
 
