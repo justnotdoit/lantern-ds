@@ -19,11 +19,64 @@
 
 ## Перевод токенов Figma → Tailwind
 
-- Spacing и shadows совпадают со стандартной шкалой Tailwind — обычные `p-*`, `gap-*`, `shadow-*`.
-- **Радиусы: имена в Figma сдвинуты на шаг** относительно Tailwind: figma `rounded-xs`=2px=tw `rounded-sm`, figma `rounded-sm`=4px=tw `rounded`, figma `rounded-md`=6px=tw `rounded-md`, figma `rounded-lg`=8px=tw `rounded-lg`. Компонентный токен `radius`=10px → `--radius` (в shadcn-компонентах сейчас это не «стандартный» rounded-lg — сверяйся со значением в px из Figma).
-- Типографика: Inter; heading 1 → `text-5xl leading-none font-semibold tracking-[-1.5px]`, heading 2 → `text-3xl leading-none font-semibold tracking-[-1px]`, heading 3 → `text-2xl font-semibold tracking-[-1px]`, heading 4 → `text-xl leading-6 font-semibold`, параграфы large/regular/small/mini → `text-lg`/`text-base`/`text-sm`/`text-xs`.
-- Цвета — только семантические токены (`bg-primary`, `text-muted-foreground`, `bg-tooltip`...). Никогда не хардкодить hex из Figma: если в макете цвет, которого нет в маппинге, — спросить дизайнера, какой это токен.
-- **ПРАВИЛО (от Alex, 2026-06-12): каждый видимый элемент обязан быть явно привязан к токену** — цвет, размер, типографика, скругление. Никогда не полагаться на случайные дефолты (например, дефолтный размер lucide-иконки 24px) или на наследование, которое может сломаться при перемещении элемента. После любого изменения вёрстки — проходить по всем затронутым элементам и сверять с токенами дизайна. Один и тот же тип элемента (пункт меню, имя агента) везде выглядит одинаково, без точечных переопределений в местах использования.
+Шпаргалка ниже покрывает 90% случаев — сверяйся с ней до похода в Figma. Полный
+источник истины для алиасов Figma-имя → shadcn-слот — `tokens/mapping.json`; значения
+токенов — `registry.json` (item `theme-lantern`) / `src/index.css`.
+
+### Цвета — только семантические токены (hex не хардкодить)
+
+| Figma переменная               | Tailwind (`text-`/`bg-`/`border-`)        | HSL-токен                       | hex      |
+|--------------------------------|-------------------------------------------|---------------------------------|----------|
+| general/background             | `bg-background`, `bg-card`, `bg-popover`  | `--background` 0 0% 100%        | `#ffffff`|
+| general/foreground             | `text-foreground` (`--card/popover-foreground` тоже) | `--foreground` 0 0% 3.9% | `#0a0a0a`|
+| general/secondary foreground   | `text-secondary-foreground`               | `--secondary-foreground` 0 0% 9%| `#171717`|
+| general/muted foreground       | `text-muted-foreground`                   | `--muted-foreground` 0 0% 45.1% | `#737373`|
+| general/border                 | `border-border` (= `--input`, `--ring` рядом) | `--border` 0 0% 89.8%       | `#e5e5e5`|
+| muted / secondary (поверхность)| `bg-muted`, `bg-secondary`                | 0 0% 96.1%                      | `#f5f5f5`|
+| primary (бренд-violet)         | `bg-primary` / `text-primary-foreground`  | `--primary` 258.8 63.3% 59.4%   | —        |
+| accent (светлый violet)        | `bg-accent` / `text-accent-foreground`    | `--accent` 267.7 95.1% 92%      | —        |
+| destructive                    | `bg-destructive` / `text-destructive`     | `--destructive` 0 72.2% 50.6%   | ~`#dc2626`|
+| tooltip (чёрный)               | `bg-tooltip` / `text-tooltip-foreground`  | `--tooltip` 0 0% 0%             | `#000000`|
+| sidebar/*                      | `bg-sidebar`, `text-sidebar-foreground`, `bg-sidebar-accent`… | `--sidebar*` | (см. theme) |
+
+- **Чипы/бейджи — сырые Tailwind-шкалы** (как в сайдбаре и app-card): `bg-lime-100`/`bg-cyan-100`/`bg-blue-100`/`bg-gray-100`/`bg-orange-100`/`bg-yellow-100`, точка статуса `bg-lime-500`. Бренд-violet — кастомная шкала из theme (`violet-50…950`). Figma `lime/100` = tw `lime-100` точно; Figma `Gray/100` #f2f4f7 ≈ tw `gray-100` #f3f4f6.
+- Если цвета нет ни в токенах, ни в шкалах (или он помечен `unofficial/*`) — **спросить дизайнера**, какой это токен.
+
+### Spacing — px ÷ 4 = Tailwind-единица
+
+Figma spacing-токены: `3xs`=2→`0.5`, `2xs`=4→`1`, `xs`=8→`2`, `sm`=12→`3`, `md`=16→`4`, дальше `px/4`. Применять как `p-*`/`gap-*`/`px-*`/`py-*`. Shadows совпадают со шкалой (`shadow-*`).
+
+### Радиусы (имена Figma сдвинуты, но px совпадают с Tailwind)
+
+figma `rounded-xs`=2=tw `rounded-sm`, `rounded-sm`=4=tw `rounded`, `rounded-md`=6=tw `rounded-md`, `rounded-lg`=8=tw `rounded-lg`, `rounded-xl`=12=tw `rounded-xl`, `rounded-full`=9999=tw `rounded-full`. Компонентный токен `radius`=10px → `--radius`. Всегда сверяйся со значением в px.
+
+### Типографика (Inter)
+
+heading 1 → `text-5xl leading-none font-semibold tracking-[-1.5px]`, heading 2 → `text-3xl leading-none font-semibold tracking-[-1px]`, heading 3 → `text-2xl font-semibold tracking-[-1px]`, heading 4 → `text-xl leading-6 font-semibold`, параграфы large/regular/small/mini → `text-lg`/`text-base`/`text-sm`/`text-xs`. Частые: paragraph small = `text-sm leading-5` (14/20), paragraph mini = `text-xs leading-4` (12/16); medium-вес = `font-medium`, regular = `font-normal`.
+
+**ПРАВИЛО (от Alex, 2026-06-12): каждый видимый элемент обязан быть явно привязан к токену** — цвет, размер, типографика, скругление. Никогда не полагаться на случайные дефолты (например, дефолтный размер lucide-иконки 24px) или на наследование, которое может сломаться при перемещении элемента. После любого изменения вёрстки — проходить по всем затронутым элементам и сверять с токенами дизайна. Один и тот же тип элемента (пункт меню, имя агента) везде выглядит одинаково, без точечных переопределений в местах использования.
+
+## Иконки — индекс
+
+Набор живёт в `registry/default/icons/` (генератор — `scripts/generate-icons.mjs`):
+- `lucide.ts` — точные имена Lucide, ре-экспорт из `lucide-react`.
+- `custom/*.tsx` — продуктовые глифы (forwardRef, `currentColor`, `size` по умолчанию 16): Accounts, AdLibrary, Agents, Apps, Assets, Calculator, Contacts, Data, History, House, Ideas, LanternLogo, Linkedin, NewAgent, Overview, PinnedTabs, Sequencing, SkillsLibrary, Views, Visualize, Workflow.
+- `index.ts` — общий barrel.
+
+**Импорт:** в registry-компонентах — напрямую из `lucide-react` (и `lucide-react` в `dependencies` item-а); в stories — из `@/registry/default/icons`.
+
+**Прежде чем опознавать иконку через Figma — grep по `lucide.ts`/`index.ts`.** Имя в Figma обычно совпадает с именем Lucide. Известные несовпадения и недавно подтверждённые глифы:
+
+| Figma / назначение        | Наш экспорт                               |
+|---------------------------|-------------------------------------------|
+| open-external-link        | `OpenExternalLink` (= `SquareArrowOutUpRight`) |
+| drag-up-down              | `DragUpDown` (= `TextAlignJustify`)       |
+| sources (app-card)        | `Atom`                                    |
+| pinned (app-card)         | `Pin`                                     |
+| more / контекст-меню      | `Ellipsis`                                |
+| статус-точка              | не иконка — кружок `size-2 rounded-full bg-lime-500` |
+
+Если глифа нет в наборе и имя неочевидно: скачать SVG-ассет из ответа `get_design_context` и отрендерить локально (`qlmanage -t -s 240 -o . icon.svg`) либо сопоставить по внутреннему `<g id="...">` — без серии скриншотов из Figma. Новые продуктовые иконки (которых нет в Lucide) добавляются в `tokens/icon-pool.json` + `tokens/svg/` и генерятся скриптом.
 
 ## Структура
 
