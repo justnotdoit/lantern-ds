@@ -11,6 +11,7 @@
  *    - Title: text-foreground, text-sm/leading-5, font-medium  (paragraph small/medium).
  *      Rendered as a heading (default h3, configurable via headingLevel) for a11y —
  *      styling is identical; Tailwind preflight resets heading margins.
+ *      Truncates to a single line (truncate) — never wraps (Alex, 2026-06-17).
  *    - Chips + description + footer: text-xs/leading-4, font-normal (paragraph mini/regular).
  *    - "Live" pill text + "Pinned" text: text-secondary-foreground.
  *    - Footer text + Atom + Pin icons: text-muted-foreground.
@@ -72,39 +73,4 @@ export const LongTitle: Story = {
   args: {
     title: "GTM Signal Breakdown for High Growth Global 2000 accounts",
   },
-};
-
-export const WithoutContextAction: Story = {
-  args: { onContextSelect: undefined },
-};
-
-export const Grid: Story = {
-  parameters: { layout: "padded" },
-  decorators: [
-    (Story) => (
-      <div className="grid w-[760px] grid-cols-2 gap-4">
-        <Story />
-      </div>
-    ),
-  ],
-  render: (args) => (
-    <>
-      <AppCard {...args} />
-      <AppCard {...args} pinned />
-      <AppCard
-        {...args}
-        title="Weekly Agentic AI"
-        description="Outbound performance digest with reply-rate deltas and the week's top sequences."
-        sourceCount={1}
-        updatedAt="1h ago"
-      />
-      <AppCard
-        {...args}
-        title="Real-Time Inbound"
-        description="Live routing of inbound demo requests enriched against the ICP firmographic model."
-        sourceCount={4}
-        updatedAt="just now"
-      />
-    </>
-  ),
 };

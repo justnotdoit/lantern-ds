@@ -56,7 +56,7 @@ const AppCard = React.forwardRef<HTMLDivElement, AppCardProps>(
         <div className="flex flex-col gap-2 p-3">
           {React.createElement(
             `h${headingLevel}`,
-            { className: "break-words text-sm font-medium leading-5 text-foreground" },
+            { className: "truncate text-sm font-medium leading-5 text-foreground" },
             title,
           )}
 
