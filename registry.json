@@ -213,6 +213,24 @@
       ]
     },
     {
+      "name": "app-card",
+      "type": "registry:ui",
+      "title": "App Card",
+      "description": "Card for a saved app/agent: title, status pill, description, source count, relative time, optional pinned state and a hover \"more\" action.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@lantern/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/app-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "icons",
       "type": "registry:ui",
       "title": "Icons",
