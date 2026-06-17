@@ -182,6 +182,10 @@ function DemoSidebar({ defaultOpen }: { defaultOpen: boolean }) {
         </SidebarHeader>
         <SidebarContent>
           <SidebarGroup>
+            {/* New Agent and the nav live in separate menus so the separator is
+                a child of the group, not of a <ul> (a <ul> may only contain <li>;
+                a role=none separator inside it fails the a11y "list" rule).
+                Both group and menu are flex-col gap-1, so spacing is unchanged. */}
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton variant="pill" tooltip="New Agent">
@@ -189,7 +193,9 @@ function DemoSidebar({ defaultOpen }: { defaultOpen: boolean }) {
                   <span>New Agent</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              <SidebarSeparator />
+            </SidebarMenu>
+            <SidebarSeparator />
+            <SidebarMenu>
               {NAV_ITEMS.map(({ id, label, icon: Icon }) => (
                 <SidebarMenuItem key={id}>
                   <SidebarMenuButton
