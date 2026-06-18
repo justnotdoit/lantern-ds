@@ -249,6 +249,25 @@
       ]
     },
     {
+      "name": "chat-input",
+      "type": "registry:ui",
+      "title": "Chat Input",
+      "description": "Chat composer: auto-growing textarea with attach/mention/enhance actions and a reused SendButton (idle / enabled / in-progress).",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@lantern/utils",
+        "@lantern/send-button"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/chat-input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "icons",
       "type": "registry:ui",
       "title": "Icons",
