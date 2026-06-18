@@ -100,8 +100,10 @@ heading 1 → `text-5xl leading-none font-semibold tracking-[-1.5px]`, heading 2
 6. `npm run registry:build && npm run check:ts51 && npm run build-storybook`.
 7. Сверить рендер в Storybook со скриншотом из Figma.
 7a. **Регрессия после правок**: у компонента в шапке story-файла ведётся список принятых на ревью решений — после любой правки пройтись по нему целиком и замерить геометрию (getBoundingClientRect через playwright) в обоих/всех состояниях. Не пушить, пока чек-лист не зелёный.
-8. E2e: поднять `npx serve public -l 8080`, в фикстуре `npx shadcn@latest add @lantern/<name> --yes --overwrite`, затем `npm run build` в фикстуре.
-9. Коммит (conventional commits: `feat: add button component`).
+8. E2e (опционально локально — CI делает это на PR): поднять `npx serve public -l 8080`, в фикстуре `npx shadcn@latest add @lantern/<name> --yes --overwrite`, затем `npm run build` в фикстуре.
+9. **Разработка в feature-ветке, не в `main`.** Вся итерация — локально (`npm run storybook` + проверки из п.6, замеры Playwright). Когда готово к ревью: `git push` ветки + `gh pr create` (conventional commits: `feat: add button component`).
+10. На PR автоматически: Chromatic собирает превью-билд **этой ветки** с визуальными диффами (без авто-принятия — дизайнер аппрувит), Vercel даёт preview-URL, CI гоняет build/ts51/e2e. Правки по ревью — новые коммиты в ту же ветку, превью обновляется.
+11. После аппрува — **мёрж PR в `main` = публикация**: Chromatic обновляет baseline (`autoAcceptChanges: "main"`), Vercel передеплоивает registry (`public/r/`) для `shadcn add`. В `main` не пушим WIP.
 
 ## Команды
 
@@ -115,3 +117,12 @@ heading 1 → `text-5xl leading-none font-semibold tracking-[-1.5px]`, heading 2
 - Storybook публикуется в Chromatic (`.github/workflows/chromatic.yml`, секрет `CHROMATIC_PROJECT_TOKEN`)
 - Registry хостится на Vercel (статика `public/r/`, CORS в `vercel.json`)
 - Разработчики подключают registry в своих `components.json`: `"@lantern": "<registry-url>/r/{name}.json"`
+
+## Деплой
+
+Деплой завязан на git, локально ничего не публикуется (`npm run storybook` :6006 + все проверки — на машине).
+
+- **push в `main`** = прод: Chromatic обновляет канонический Storybook (авто-baseline) + Vercel передеплоивает registry для `shadcn add`.
+- **pull_request** = превью: Chromatic собирает diff-билд ветки (ревью/аппрув, без авто-принятия) + Vercel preview-URL. Прод не трогается.
+
+**Дефолт (решение Alex, 2026-06-17): новый компонент → feature-ветка → PR-превью для ревью → мёрж в `main` только когда отполировано.** В `main` не пушим полуфабрикат, чтобы публичный Storybook и устанавливаемый registry показывали только готовое.
