@@ -231,6 +231,24 @@
       ]
     },
     {
+      "name": "send-button",
+      "type": "registry:ui",
+      "title": "Send Button",
+      "description": "Circular chat send button with enabled / disabled / in-progress states (up-arrow, or a stop glyph while generating).",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@lantern/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/send-button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "icons",
       "type": "registry:ui",
       "title": "Icons",
