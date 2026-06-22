@@ -9,6 +9,9 @@
  * 4. Активный пункт один; ellipsis у активного агента виден постоянно, у остальных —
  *    по hover (справа). Статус-иконка агента — СЛЕВА от названия (п.8); chip-иконок
  *    слева больше нет (обновление 2026-06-17, Figma node 9342:1399).
+ *    Подсветка строки — на group-hover/menu-item (не на :hover кнопки): ellipsis —
+ *    absolute-сосед, поэтому при наведении на него :hover кнопки спадал и подсветка
+ *    пропадала. Теперь строка подсвечена, пока курсор где угодно в строке.
  * 5. Колонка иконок: x=22 (центр 30) в ОБОИХ состояниях — иконки не двигаются
  *    при сворачивании; контент px-2.5 + кнопка px-3; rail 60px.
  * 6. Логотип absolute (не толкает триггер), центр по колонке иконок; триггер
@@ -77,7 +80,9 @@ function AgentRow({ label, status, isActive, onSelect }: AgentRowProps) {
         isActive={isActive}
         tooltip={label}
         onClick={onSelect}
-        className="gap-2"
+        // group-hover/menu-item: keep the row highlighted while hovering the
+        // ellipsis too (it's an absolute sibling, so the button's own :hover drops).
+        className="gap-2 group-hover/menu-item:bg-sidebar-accent"
       >
         {status && (
           <span className="flex shrink-0 items-center justify-center [&>svg]:size-4 [&>svg]:shrink-0">
