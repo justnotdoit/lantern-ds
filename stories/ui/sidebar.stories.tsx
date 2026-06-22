@@ -6,19 +6,21 @@
  * 1. Типографика пунктов и агентов: paragraph small regular (text-sm/20, 400).
  * 2. Цвет текста пунктов и агентов: --foreground. Иконки: --muted-foreground.
  * 3. Цвета текста/иконок НЕ меняются на hover/active — меняется только фон.
- * 4. Активный пункт один; у активного агента ellipsis виден постоянно,
- *    у остальных — по hover, на месте статус-иконки (без сдвигов).
+ * 4. Активный пункт один; ellipsis у активного агента виден постоянно, у остальных —
+ *    по hover (справа). Статус-иконка агента — СЛЕВА от названия (п.8); chip-иконок
+ *    слева больше нет (обновление 2026-06-17, Figma node 9342:1399).
  * 5. Колонка иконок: x=22 (центр 30) в ОБОИХ состояниях — иконки не двигаются
  *    при сворачивании; контент px-2.5 + кнопка px-3; rail 60px.
  * 6. Логотип absolute (не толкает триггер), центр по колонке иконок; триггер
  *    по правой колонке (троеточия/статусы, cx=234), shrink-0.
  * 7. Сворачивание плавное: текст и группы агентов фейдятся (200ms), без
  *    display:none и мгновенных перестроек.
- * 8. Статус-иконки 16px явно ([&>svg]:size-4 на слое статуса).
+ * 8. Статус-иконки агентов 16px, СЛЕВА от названия внутри pill-кнопки (gap-2): обёртка
+ *    задаёт [&>svg]:size-4, цвет — на самой иконке. in-progress=muted-foreground (loader,
+ *    spin), failed=destructive, needs-attention=yellow-600. Recent-агенты без статуса.
  */
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { cn } from "@/lib/utils";
 import {
   Sidebar,
   SidebarContent,
@@ -41,22 +43,14 @@ import {
   CircleQuestionMark,
   ContactsIcon,
   Ellipsis,
-  Goal,
   IdeasIcon,
   LanternLogoIcon,
-  Leaf,
   LoaderCircle,
   NewAgentIcon,
-  Send,
   SequencingIcon,
-  Settings2,
   SkillsLibraryIcon,
   TriangleAlert,
-  UserRoundSearch,
-  WandSparkles,
 } from "@/registry/default/icons";
-
-type IconComponent = React.ComponentType<{ size?: number | string; className?: string }>;
 
 const NAV_ITEMS = [
   { id: "nav-agents", label: "Agents", icon: AgentsIcon },
@@ -68,42 +62,30 @@ const NAV_ITEMS = [
   { id: "nav-ad-library", label: "Ad Library", icon: AdLibraryIcon },
 ];
 
-function CategoryChip({ icon: Icon, className }: { icon: IconComponent; className: string }) {
-  return (
-    <span
-      className={`flex size-5 shrink-0 items-center justify-center rounded-xl text-muted-foreground ${className}`}
-    >
-      <Icon size={12} />
-    </span>
-  );
-}
-
 interface AgentRowProps {
   label: string;
-  chip: IconComponent;
-  chipClassName: string;
   status?: React.ReactNode;
   isActive: boolean;
   onSelect: () => void;
 }
 
-function AgentRow({ label, chip, chipClassName, status, isActive, onSelect }: AgentRowProps) {
+function AgentRow({ label, status, isActive, onSelect }: AgentRowProps) {
   return (
     <SidebarMenuItem>
-      <SidebarMenuButton variant="pill" isActive={isActive} tooltip={label} onClick={onSelect}>
-        <CategoryChip icon={chip} className={chipClassName} />
+      <SidebarMenuButton
+        variant="pill"
+        isActive={isActive}
+        tooltip={label}
+        onClick={onSelect}
+        className="gap-2"
+      >
+        {status && (
+          <span className="flex shrink-0 items-center justify-center [&>svg]:size-4 [&>svg]:shrink-0">
+            {status}
+          </span>
+        )}
         <span className="min-w-0 flex-1 truncate">{label}</span>
       </SidebarMenuButton>
-      {status && (
-        <span
-          className={cn(
-            "pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 group-hover/menu-item:invisible [&>svg]:size-4",
-            isActive && "invisible",
-          )}
-        >
-          {status}
-        </span>
-      )}
       <SidebarMenuAction showOnHover={!isActive} className="right-3 w-4 rounded-full">
         <Ellipsis />
         <span className="sr-only">More</span>
@@ -115,8 +97,6 @@ function AgentRow({ label, chip, chipClassName, status, isActive, onSelect }: Ag
 interface AgentConfig {
   id: string;
   label: string;
-  chip: IconComponent;
-  chipClassName: string;
   status?: React.ReactNode;
 }
 
@@ -124,23 +104,17 @@ const BUILDING_AGENTS: AgentConfig[] = [
   {
     id: "agent-retail",
     label: "Retail champions",
-    chip: Leaf,
-    chipClassName: "bg-lime-100",
     status: <LoaderCircle className="animate-spin text-muted-foreground" />,
   },
   {
     id: "agent-hggt-1",
     label: "High Growth Global 2000",
-    chip: Settings2,
-    chipClassName: "bg-cyan-100",
     status: <TriangleAlert className="text-destructive" />,
   },
   {
     id: "agent-hggt-2",
     label: "High Growth Global 2000",
-    chip: Goal,
-    chipClassName: "bg-orange-100",
-    status: <CircleQuestionMark className="text-amber-500" />,
+    status: <CircleQuestionMark className="text-yellow-600" />,
   },
 ];
 
@@ -148,20 +122,14 @@ const RECENT_AGENTS: AgentConfig[] = [
   {
     id: "agent-pipeline",
     label: "Pipeline Enrichment with a very long name",
-    chip: WandSparkles,
-    chipClassName: "bg-blue-100",
   },
   {
     id: "agent-weekly",
     label: "Weekly Agentic AI",
-    chip: Send,
-    chipClassName: "bg-yellow-100",
   },
   {
     id: "agent-inbound",
     label: "Real-Time Inbound",
-    chip: UserRoundSearch,
-    chipClassName: "bg-gray-100",
   },
 ];
 
@@ -218,8 +186,6 @@ function DemoSidebar({ defaultOpen }: { defaultOpen: boolean }) {
                 <AgentRow
                   key={agent.id}
                   label={agent.label}
-                  chip={agent.chip}
-                  chipClassName={agent.chipClassName}
                   status={agent.status}
                   isActive={activeId === agent.id}
                   onSelect={() => setActiveId(agent.id)}
@@ -235,8 +201,6 @@ function DemoSidebar({ defaultOpen }: { defaultOpen: boolean }) {
                 <AgentRow
                   key={agent.id}
                   label={agent.label}
-                  chip={agent.chip}
-                  chipClassName={agent.chipClassName}
                   status={agent.status}
                   isActive={activeId === agent.id}
                   onSelect={() => setActiveId(agent.id)}
